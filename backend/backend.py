@@ -1,8 +1,8 @@
 import string
-import csv
 import os
+import math
 
-# load passwords into a set for O(1) lookups
+# Load passwords into a set for O(1) lookups
 def load_passwords():
     common_passwords = set()
 
@@ -16,87 +16,139 @@ def load_passwords():
     return common_passwords
 
 
-def read_input():
-    return input("Enter your password: ")
+
+# ---------------- ENTROPY ---------------- #
+
+def password_entropy(password, is_common):
+    #If common do not even calculate entropy
+    if is_common:
+        return 5  # extremely weak
+
+    charset_size = 0
+
+    if any(c.islower() for c in password):
+        charset_size += 26
+    if any(c.isupper() for c in password):
+        charset_size += 26
+    if any(c.isdigit() for c in password):
+        charset_size += 10
+    if any(c in string.punctuation for c in password):
+        charset_size += len(string.punctuation)
+
+    if charset_size == 0:
+        return 0
+
+    entropy = len(password) * math.log2(charset_size)
+    return round(entropy, 2)
 
 
-def password_analysis(password_dict, common_passwords):
-    password = password_dict["password"]
+def format_time(seconds):
+    intervals = [
+        ("years",   365.25 * 24 * 3600),
+        ("days",    24 * 3600),
+        ("hours",   3600),
+        ("minutes", 60),
+        ("seconds", 1),
+    ]
+    for name, count in intervals:
+        value = seconds / count
+        if value >= 1:
+            return f"{value:,.1f} {name}"
+    return "less than a second"
+
+
+def estimate_crack_time(entropy_bits):
+    attack_speeds = {
+        "online": 1_000,
+        "offline": 1_000_000_000,
+        "gpu": 10_000_000_000,
+    }
+
+    results = []
+
+    for label, speed in attack_speeds.items():
+        # avoid huge numbers
+        guesses = min(2 ** entropy_bits, 1e18)
+        seconds = guesses / speed
+
+        results.append({
+            "attack_type": label,
+            "time": format_time(seconds)
+        })
+
+    return results
+
+
+# ---------------- MAIN ANALYSIS ---------------- #
+
+def password_analysis(password, common_passwords):
     score = 0
     reasons = []
 
-    # Length
+    # Checks
     if len(password) < 12:
         reasons.append("be at least 12 characters long")
     else:
         score += 20
 
-    # Digit
-    if not any(char.isdigit() for char in password):
+    if not any(c.isdigit() for c in password):
         reasons.append("contain at least one digit")
     else:
         score += 20
 
-    # Uppercase
-    if not any(char.isupper() for char in password):
+    if not any(c.isupper() for c in password):
         reasons.append("contain at least one uppercase letter")
     else:
         score += 20
 
-    # Lowercase
-    if not any(char.islower() for char in password):
+    if not any(c.islower() for c in password):
         reasons.append("contain at least one lowercase letter")
     else:
         score += 20
 
-    # Special character
-    if not any(char in string.punctuation for char in password):
+    if not any(c in string.punctuation for c in password):
         reasons.append("contain at least one special character")
     else:
         score += 20
 
-    # Common password check (FAST now)
-    if password in common_passwords:
+    # Common password check
+    is_common = password in common_passwords
+    if is_common:
         reasons.append("not be a commonly used password")
         score -= 40
 
-    # Clamp score
     score = max(0, min(score, 100))
 
-    # Strength classification
+    # Strength
     if score < 60:
         strength = "Weak"
-        suggestions = ["Use at least 12 characters with a mix of letters, numbers, and symbols."]
     elif score < 100:
         strength = "Medium"
-        suggestions = ["Increase complexity and avoid predictable patterns."]
     else:
         strength = "Strong"
-        suggestions = []
 
-    # Final structured output
+    # Entropy + crack time
+    entropy = password_entropy(password, is_common)
+    crack_time = estimate_crack_time(entropy)
+
     return {
         "password": password,
         "score": score,
         "strength": strength,
         "issues": reasons,
-        "suggestions": suggestions
+        "entropy": entropy,
+        "crack_time": crack_time
     }
+
+
 
 
 def main():
-    print("Password Strength Checker")
-
-    # Load dataset
     common_passwords = load_passwords()
 
-    input_password = read_input()
+    password = input("Enter password: ")
 
-    password_dict = {
-        "password": input_password
-    }
-
-    result = password_analysis(password_dict, common_passwords)
+    result = password_analysis(password, common_passwords)
 
     print("\nResult:")
     print(result)

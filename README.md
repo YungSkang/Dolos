@@ -15,12 +15,11 @@ A web-based cybersecurity tool that analyzes password strength and detects poten
   - Strength score (0–100)
   - Classification (Weak / Medium / Strong)
   - Issues and suggestions for improvement
+  - Entropy calculation
+  - Estimated password cracking time
 
 ### 🧠 Security Insights (Planned)
-- Entropy calculation
-- Estimated password cracking time
 - Phishing detection (email/URL analysis)
-
 ---
 
 ## 🛠️ Tech Stack
@@ -62,16 +61,18 @@ README.md
         "be longer",
         "contain at least one special character"
     ],
-    "suggestions": [
-        "Increase complexity and avoid predictable patterns."
-    ]
+    'entropy': 104.87, 
+    'crack_time': [
+      {'attack_type': 'online', 
+      'time': '31,688,087.8 years'},
+      {'attack_type': 'offline',
+      'time': '31.7 years'}, 
+      {'attack_type': 'gpu', 
+      'time': '3.2 years'}]
 }
 ---
 
 ## 🎯 Future Improvements
-
-- Add entropy-based strength calculation
-- Estimate brute-force cracking time
 - Implement phishing detection module
 - Build interactive dashboard UI
 - Deploy as a full-stack web application
