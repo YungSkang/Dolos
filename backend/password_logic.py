@@ -16,8 +16,7 @@ def load_passwords():
     return common_passwords
 
 
-
-# ---------------- ENTROPY ---------------- #
+# calculate entropy based on character sets and length
 
 def password_entropy(password, is_common):
     #If common do not even calculate entropy
@@ -79,7 +78,7 @@ def estimate_crack_time(entropy_bits):
     return results
 
 
-# ---------------- MAIN ANALYSIS ---------------- #
+# main analysis function
 
 def password_analysis(password, common_passwords):
     score = 0
@@ -143,16 +142,3 @@ def password_analysis(password, common_passwords):
 
 
 
-def main():
-    common_passwords = load_passwords()
-
-    password = input("Enter password: ")
-
-    result = password_analysis(password, common_passwords)
-
-    print("\nResult:")
-    print(result)
-
-
-if __name__ == "__main__":
-    main()
