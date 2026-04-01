@@ -3,59 +3,10 @@ body {
   background: radial-gradient(circle at top, #0f172a, #020617);
   color: #e5e7eb;
   font-family: 'Inter', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-
-@keyframes eyeWatch {
-  0%   { opacity: 0;    transform: scale(0.92) rotate(-2deg); }
-  8%   { opacity: 0.13; transform: scale(1)    rotate(0deg);  }
-  /* blink 1 */
-  38%  { opacity: 0.13; transform: scale(1.02) rotate(1deg);  }
-  40%  { opacity: 0.03; transform: scale(1.02) rotate(1deg);  }
-  42%  { opacity: 0.13; transform: scale(1.02) rotate(1deg);  }
-  /* blink 2 */
-  70%  { opacity: 0.11; transform: scale(0.99) rotate(-1deg); }
-  72%  { opacity: 0.02; transform: scale(0.99) rotate(-1deg); }
-  74%  { opacity: 0.11; transform: scale(0.99) rotate(-1deg); }
-  90%  { opacity: 0.07; transform: scale(0.95) rotate(-2deg); }
-  100% { opacity: 0;    transform: scale(0.9)  rotate(-3deg); }
-}
-
-.bg-eye {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  /* Two eye instances via layered backgrounds */
-  background-image:
-    url('/eye.png'),
-    url('/eye.png');
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  /* Positions: top-right, bottom-left, center-ish */
-  background-position:
-    82% 12%,
-    14% 78%,
-    55% 48%;
-  /* Sizes: vary so they feel like different distances */
-  background-size:
-    340px 340px,
-    260px 260px,
-    420px 420px;
-  /* Each instance gets its own animation layer with different delays/durations */
-  animation:
-    eyeWatch 18s ease-in-out 0s   infinite,
-    eyeWatch 22s ease-in-out 6s   infinite,
-    eyeWatch 28s ease-in-out 11s  infinite;
-  /* Blend so it sits behind content without washing it out */
-  mix-blend-mode: screen;
 }
 
 /* CENTER LAYOUT */
 #center {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -66,18 +17,19 @@ body {
 
 /* HERO */
 .hero img {
-  width: 220px;
+  width: 120px;
   filter: drop-shadow(0 0 10px rgba(0,255,160,0.6));
   transition: transform 0.3s ease;
 }
 .hero img:hover {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.1) rotate(2deg);
 }
 
 /* INPUT ROW */
 .input-row {
   display: flex;
   align-items: center;
+  gap: 0;
 }
 
 .input-wrapper {
@@ -95,7 +47,7 @@ input[type="date"] {
   background: #020617;
   color: white;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: 0.3s;
   width: 250px;
   font-size: 14px;
 }
@@ -107,27 +59,28 @@ input[type="date"]:focus {
   box-shadow: 0 0 10px rgba(0,255,160,0.4);
 }
 
-/* Eye toggle */
 .eye-btn {
   position: absolute;
   right: 10px;
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: none;
+  border: none;
   cursor: pointer;
   font-size: 16px;
   padding: 0;
+  margin: 0;
   color: #6b7280;
-  line-height: 1;
+  box-shadow: none;
+  transform: none;
 }
 .eye-btn:hover {
-  transform: none !important;
-  box-shadow: none !important;
-  background: none !important;
+  transform: none;
+  box-shadow: none;
+  background: none;
 }
 
 /* PRIMARY BUTTON */
-button[type="submit"] {
+button[type="submit"],
+button[type="button"].analyze-personal-btn {
   padding: 12px 18px;
   border-radius: 0 8px 8px 0;
   border: none;
@@ -135,10 +88,11 @@ button[type="submit"] {
   font-weight: bold;
   background: linear-gradient(135deg, #00ff9f, #00c3ff);
   color: black;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   font-size: 14px;
 }
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+button[type="button"].analyze-personal-btn:hover {
   transform: scale(1.04);
   box-shadow: 0 0 15px rgba(0,255,160,0.7);
 }
@@ -146,7 +100,6 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
-  box-shadow: none !important;
 }
 
 /* RESULT CARD */
@@ -315,20 +268,22 @@ button:disabled {
   word-break: break-all;
 }
 .copy-btn {
-  padding: 6px 14px !important;
-  border-radius: 6px !important;
-  border: 1px solid rgba(0,255,160,0.3) !important;
-  background: rgba(0,255,160,0.07) !important;
-  color: #00ff9f !important;
-  font-size: 12px !important;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,255,160,0.3);
+  background: rgba(0,255,160,0.07);
+  color: #00ff9f;
+  font-size: 12px;
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s;
+  margin-left: 0;
+  border-radius: 6px !important;
 }
 .copy-btn:hover {
-  background: rgba(0,255,160,0.15) !important;
-  transform: none !important;
-  box-shadow: none !important;
+  background: rgba(0,255,160,0.15);
+  transform: none;
+  box-shadow: none;
 }
 .gen-hint {
   color: #4b5563;
@@ -344,25 +299,24 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  padding-bottom: 60px;
 }
 
 .toggle-personal-btn {
-  background: transparent !important;
-  border: 1px solid rgba(0,255,160,0.25) !important;
-  color: #00ff9f !important;
-  border-radius: 8px !important;
-  padding: 10px 20px !important;
-  font-size: 13px !important;
+  background: transparent;
+  border: 1px solid rgba(0,255,160,0.25);
+  color: #00ff9f;
+  border-radius: 8px 8px 8px 8px !important;
+  padding: 10px 20px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
   width: 100%;
 }
 .toggle-personal-btn:hover {
-  background: rgba(0,255,160,0.07) !important;
-  box-shadow: 0 0 12px rgba(0,255,160,0.2) !important;
-  transform: none !important;
+  background: rgba(0,255,160,0.07);
+  box-shadow: 0 0 12px rgba(0,255,160,0.2);
+  transform: none;
 }
 
 /* PERSONAL CARD */
@@ -372,12 +326,11 @@ button:disabled {
   border-radius: 16px;
   background: rgba(17,17,17,0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,100,0,0.2);
+  border: 1px solid rgba(255,100,0,0.15);
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
   display: flex;
   flex-direction: column;
   gap: 14px;
-  box-sizing: border-box;
 }
 .personal-card h2 {
   margin: 0;
@@ -402,7 +355,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  font-size: 11px;
+  font-size: 12px;
   color: #9ca3af;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -410,26 +363,14 @@ button:disabled {
 .personal-form input {
   border-radius: 8px !important;
   width: 100% !important;
-  box-sizing: border-box !important;
+  box-sizing: border-box;
   padding: 10px 12px !important;
 }
 
-/* ANALYZE BUTTON */
 .analyze-personal-btn {
-  padding: 12px 18px !important;
   border-radius: 8px !important;
-  border: none !important;
-  cursor: pointer;
-  font-weight: bold;
-  background: linear-gradient(135deg, #00ff9f, #00c3ff) !important;
-  color: black !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size: 14px !important;
   width: 100%;
-}
-.analyze-personal-btn:hover {
-  transform: scale(1.02) !important;
-  box-shadow: 0 0 15px rgba(0,255,160,0.5) !important;
+  margin-top: 4px;
 }
 
 /* PERSONAL RESULTS */
@@ -487,5 +428,4 @@ button:disabled {
   border-radius: 8px;
   padding: 10px 12px;
   margin: 4px 0 0;
-  line-height: 1.5;
 }

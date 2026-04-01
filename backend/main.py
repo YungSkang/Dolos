@@ -1,32 +1,56 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.password_logic import password_analysis, load_passwords
+from backend.password_logic import (
+    password_analysis,
+    load_passwords,
+    build_personal_candidates,
+    analyze_personal_candidates,
+)
 
 app = FastAPI()
-#add CORS middleware to allow requests from the frontend
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default port
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# load passwords at startup
+
+# Load once at startup — not on every request
 common_passwords = load_passwords()
 
 
-# request password
 class PasswordRequest(BaseModel):
     password: str
 
 
-# create endpoint
+class PersonalInfoRequest(BaseModel):
+    first_name: Optional[str] = None
+    last_name:  Optional[str] = None
+    birthdate:  Optional[str] = None   # expected: "YYYY-MM-DD"
+    pet_name:   Optional[str] = None
+    city_name:  Optional[str] = None
+
+
+# endpoints for the API to be called from the frontend 
+
 @app.post("/analyze-password")
 def analyze_password(request: PasswordRequest):
-    password = request.password
+    return password_analysis(request.password, common_passwords)
 
-    result = password_analysis(password, common_passwords)
 
-    return result
+@app.post("/personal-candidates")
+def personal_candidates(request: PersonalInfoRequest):
+    candidates = build_personal_candidates(
+        first_name=request.first_name,
+        last_name=request.last_name,
+        birthdate=request.birthdate,
+        pet_name=request.pet_name,
+        city_name=request.city_name,
+    )
+    results = analyze_personal_candidates(candidates, common_passwords)
+    return {"candidates": results}
