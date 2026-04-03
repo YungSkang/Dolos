@@ -3,6 +3,9 @@ import heroImg from './assets/hero.png'
 import EyeField from './EyeField'
 import './App.css'
 
+
+const API = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+
 // mapping of strength tiers to bar percentages and colors
 
 const STRENGTH_PERCENT = {
@@ -65,7 +68,7 @@ export default function App() {
     if (!password.trim()) return
     setLoading(true)
     try {
-      const res  = await fetch('http://127.0.0.1:8000/analyze-password', {
+      const res  = await fetch(`${API}/analyze-password`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ password }),
@@ -91,7 +94,7 @@ export default function App() {
     if (!hasInput) return
     setPersonalLoading(true)
     try {
-      const res  = await fetch('http://127.0.0.1:8000/personal-candidates', {
+      const res  = await fetch(`${API}/personal-candidates`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify(personalInfo),
