@@ -1,4 +1,4 @@
-![Image1](Dolos/src/assets/screenshot1.png)
+![Image1](Dolos/Dolos/src/assets/screenshot1.png)
 # 🔐 Dolos — AI-Powered Password & Phishing Awareness Platform
 
 Dolos is a full-stack cybersecurity awareness tool designed to simulate real-world password attacks and educate users on how weak credentials and personal information can be exploited.
