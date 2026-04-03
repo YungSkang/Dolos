@@ -1,10 +1,13 @@
 /* GLOBAL */
+
 body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: radial-gradient(circle at top, #000000, #1e0039); 
   color: #e5e7eb;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -23,34 +26,7 @@ body {
   100% { opacity: 0;    transform: scale(0.9)  rotate(-3deg); }
 }
 
-.bg-eye {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  /* Two eye instances via layered backgrounds */
-  background-image:
-    url('/eye.png'),
-    url('/eye.png');
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  /* Positions: top-right, bottom-left, center-ish */
-  background-position:
-    82% 12%,
-    14% 78%,
-    55% 48%;
-  /* Sizes: vary so they feel like different distances */
-  background-size:
-    340px 340px,
-    260px 260px,
-    420px 420px;
-  /* Each instance gets its own animation layer with different delays/durations */
-  animation:
-    eyeWatch 18s ease-in-out 0s   infinite,
-    eyeWatch 22s ease-in-out 6s   infinite,
-    eyeWatch 28s ease-in-out 11s  infinite;
-  /* Blend so it sits behind content without washing it out */
-  mix-blend-mode: screen;
-}
+
 
 /* CENTER LAYOUT */
 #center {
@@ -58,7 +34,7 @@ body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
   align-items: center;
   justify-content: center;
   padding: 40px 16px;
@@ -67,11 +43,10 @@ body {
 /* HERO */
 .hero img {
   width: 220px;
-  filter: drop-shadow(0 0 10px rgba(0,255,160,0.6));
   transition: transform 0.3s ease;
 }
 .hero img:hover {
-  transform: scale(1.05) rotate(1deg);
+  transform: scale(1.03);
 }
 
 /* INPUT ROW */
@@ -103,8 +78,8 @@ input[type="date"] {
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus {
-  border-color: #00ff9f;
-  box-shadow: 0 0 10px rgba(0,255,160,0.4);
+  border-color: #874bff;
+  box-shadow: 0 0 10px rgba(135,75,255,0.4);
 }
 
 /* Eye toggle */
@@ -133,14 +108,14 @@ button[type="submit"] {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  background: linear-gradient(135deg, #00ff9f, #00c3ff);
+  background: linear-gradient(135deg, #874bff, #790b9d);
   color: black;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 14px;
 }
 button[type="submit"]:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 15px rgba(0,255,160,0.7);
+  box-shadow: 0 0 15px rgba(135,75,255,0.4);;
 }
 button:disabled {
   opacity: 0.5;
@@ -192,7 +167,7 @@ button:disabled {
 .strength.weak        { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,0.7); }
 .strength.fair        { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.7); }
 .strength.strong      { color: #7cfc00; text-shadow: 0 0 8px rgba(124,252,0,0.7); }
-.strength.very-strong { color: #00ff9f; text-shadow: 0 0 10px rgba(0,255,160,0.8); }
+.strength.very-strong { color: #874bff; text-shadow: 0 0 10px rgba(0,255,160,0.8); }
 
 /* ENTROPY BAR */
 .entropy-bar-track {
@@ -283,7 +258,7 @@ button:disabled {
 }
 .crack-card:hover {
   transform: scale(1.04);
-  box-shadow: 0 0 15px rgba(0,255,160,0.2);
+  box-shadow: 0 0 15px #874bff;
 }
 .crack-type {
   color: #6b7280;
@@ -306,7 +281,7 @@ button:disabled {
   gap: 8px;
 }
 .generated-pwd {
-  color: #00ff9f;
+  color: #ffffff;
   font-size: 13px;
   background: rgba(0,255,160,0.07);
   padding: 6px 10px;
@@ -317,18 +292,18 @@ button:disabled {
 .copy-btn {
   padding: 6px 14px !important;
   border-radius: 6px !important;
-  border: 1px solid rgba(0,255,160,0.3) !important;
-  background: rgba(0,255,160,0.07) !important;
-  color: #00ff9f !important;
+  border: 1px solid #874bff !important;
+  background: #6337bc15 !important;
+  color: #874bff !important;
   font-size: 12px !important;
   cursor: pointer;
   font-weight: 600;
   transition: background 0.2s;
 }
 .copy-btn:hover {
-  background: rgba(0,255,160,0.15) !important;
+  background: #6337bc5c !important;
   transform: none !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 5px #874bff !important;
 }
 .gen-hint {
   color: #4b5563;
@@ -350,7 +325,7 @@ button:disabled {
 .toggle-personal-btn {
   background: transparent !important;
   border: 1px solid rgba(0,255,160,0.25) !important;
-  color: #00ff9f !important;
+  color: #c1ff72 !important;
   border-radius: 8px !important;
   padding: 10px 20px !important;
   font-size: 13px !important;
@@ -361,7 +336,7 @@ button:disabled {
 }
 .toggle-personal-btn:hover {
   background: rgba(0,255,160,0.07) !important;
-  box-shadow: 0 0 12px rgba(0,255,160,0.2) !important;
+  box-shadow: 0 0 12px rgba(102, 0, 255, 0.2) !important;
   transform: none !important;
 }
 
@@ -372,7 +347,7 @@ button:disabled {
   border-radius: 16px;
   background: rgba(17,17,17,0.6);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,100,0,0.2);
+  border: 1px solid #ff3131;
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
   display: flex;
   flex-direction: column;
@@ -383,7 +358,7 @@ button:disabled {
   margin: 0;
   font-size: 17px;
   font-weight: 600;
-  color: #ff8c00;
+  color: #ff3131;
 }
 .personal-desc {
   font-size: 13px;
@@ -421,7 +396,7 @@ button:disabled {
   border: none !important;
   cursor: pointer;
   font-weight: bold;
-  background: linear-gradient(135deg, #00ff9f, #00c3ff) !important;
+  background: linear-gradient(135deg, #874bff, #790b9d) !important;
   color: black !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 14px !important;
@@ -429,7 +404,7 @@ button:disabled {
 }
 .analyze-personal-btn:hover {
   transform: scale(1.02) !important;
-  box-shadow: 0 0 15px rgba(0,255,160,0.5) !important;
+  box-shadow: 0 0 15px #874bff !important;
 }
 
 /* PERSONAL RESULTS */

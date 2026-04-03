@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import heroImg from './assets/hero.png'
+import EyeField from './EyeField'
 import './App.css'
 
 // mapping of strength tiers to bar percentages and colors
@@ -116,7 +117,7 @@ export default function App() {
 
   return (
     <>
-    <div className="bg-eye" aria-hidden="true" />
+    <EyeField count={8} />
     <section id="center">
       <div className="hero">
         <img src={heroImg} alt="" />
@@ -139,7 +140,7 @@ export default function App() {
             onClick={() => setShowPassword(v => !v)}
             aria-label="Toggle visibility"
           >
-            {showPassword ? '🙈' : '👁'}
+            {showPassword ? <img src="/eye.png" alt="Hide password" style={{ width: '16px', height: '16px' }} /> : '🙈'}
           </button>
         </div>
         <button type="submit" disabled={loading}>
@@ -242,7 +243,7 @@ export default function App() {
           <div className="personal-card">
             <h2>Personal Info Attack Simulator</h2>
             <p className="personal-desc">
-              Attackers don't only brute-force passwords — they build targeted wordlists
+              Attackers don't only brute-force passwords, they build targeted wordlists
               from personal information found on social media or in data breaches. Fill
               in any fields below to see what an attacker who knows you might try.
             </p>
