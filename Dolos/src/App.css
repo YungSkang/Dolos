@@ -180,7 +180,7 @@ button:disabled {
 .strength.weak        { color: #ff8c00; text-shadow: 0 0 8px rgba(255,140,0,0.7); }
 .strength.fair        { color: #ffd700; text-shadow: 0 0 8px rgba(255,215,0,0.7); }
 .strength.strong      { color: #7cfc00; text-shadow: 0 0 8px rgba(124,252,0,0.7); }
-.strength.very-strong { color: #874bff; text-shadow: 0 0 10px rgba(0,255,160,0.8); }
+.strength.very-strong { color: #874bff; text-shadow: 0 0 10px rgba(135, 75, 255, 0.7); }
 
 /* ENTROPY BAR */
 .entropy-bar-track {
