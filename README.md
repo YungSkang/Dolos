@@ -252,7 +252,7 @@ Unlike typical password checkers, Dolos:
 
 ## 👨‍💻 Author
 
-Angelos Ska
+Angelos Skandalis
 Informatics & Computer Engineering Student
 Cybersecurity • AI • Full-Stack Development
 
