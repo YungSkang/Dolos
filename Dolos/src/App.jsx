@@ -3,7 +3,8 @@ import heroImg from './assets/hero.png'
 import EyeField from './EyeField'
 import './App.css'
 
-
+//for the live API URL, we read from an environment variable injected by Vite. 
+// If not set, we default to localhost for local development.
 const API = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
 
 // mapping of strength tiers to bar percentages and colors
@@ -61,27 +62,38 @@ export default function App() {
   const [personalResults, setPersonalResults]   = useState([])
   const [personalLoading, setPersonalLoading]   = useState(false)
 
+  // slow loading for API calls to wake up free Render instances that may have gone to sleep. 
+  // Only used in production, ignored in development. 
+  const [slowLoad, setSlowLoad] = useState(false)
+
   // handle password check form submission
 
   const handleCheck = async (e) => {
-    e.preventDefault()
-    if (!password.trim()) return
-    setLoading(true)
-    try {
-      const res  = await fetch(`${API}/analyze-password`, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ password }),
-      })
-      const data = await res.json()
-      setResult(data)
-      setGeneratedPwd(generateStrongPassword())
-    } catch (err) {
-      console.error('Error:', err)
-    } finally {
-      setLoading(false)
-    }
+  e.preventDefault()
+  if (!password.trim()) return
+  setLoading(true)
+  setSlowLoad(false)
+
+  // If fetch takes more than 4 seconds, show the wake-up hint
+  const timeout = setTimeout(() => setSlowLoad(true), 4000)
+
+  try {
+    const res  = await fetch(`${API}/analyze-password`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ password }),
+    })
+    const data = await res.json()
+    setResult(data)
+    setGeneratedPwd(generateStrongPassword())
+  } catch (err) {
+    console.error('Error:', err)
+  } finally {
+    clearTimeout(timeout)
+    setLoading(false)
+    setSlowLoad(false)
   }
+}
 
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedPwd)
@@ -151,6 +163,11 @@ export default function App() {
         </button>
       </form>
 
+      {slowLoad && (
+        <p className="wake-hint">
+          ⏳ Backend is waking up — this only happens on the first visit. Usually takes 20–30s…
+        </p>
+      )}
       {/* ── Result card ── */}
       {result && (
         <div className="result-card">

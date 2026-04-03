@@ -124,6 +124,19 @@ button:disabled {
   box-shadow: none !important;
 }
 
+.wake-hint {
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  max-width: 360px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* RESULT CARD */
 .result-card {
   width: 100%;

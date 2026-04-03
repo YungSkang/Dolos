@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 from backend.password_logic import (
     password_analysis,
@@ -12,15 +13,21 @@ from backend.password_logic import (
 
 app = FastAPI()
 
+# Allow both local dev and the live Vercel frontend
+origins = [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    "https://dolos-nu.vercel.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Load once at startup — not on every request
 common_passwords = load_passwords()
 
 
@@ -31,12 +38,10 @@ class PasswordRequest(BaseModel):
 class PersonalInfoRequest(BaseModel):
     first_name: Optional[str] = None
     last_name:  Optional[str] = None
-    birthdate:  Optional[str] = None   # expected: "YYYY-MM-DD"
+    birthdate:  Optional[str] = None
     pet_name:   Optional[str] = None
     city_name:  Optional[str] = None
 
-
-# endpoints for the API to be called from the frontend 
 
 @app.post("/analyze-password")
 def analyze_password(request: PasswordRequest):
