@@ -51,7 +51,16 @@ body {
 
 /* PSC Text */
 .psc-text img {
-  width: 60vh;
+  width: min(60vh, 90vw);
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .psc-text img {
+    width: 80vw;
+  }
 }
 
 
