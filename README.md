@@ -16,7 +16,7 @@ Built with a focus on **security realism, user experience, and modern web techno
 
   * Weak length & low complexity
   * Repeated characters & predictable patterns
-  * Common passwords (10M dataset)
+  * Common passwords (10 Million Passwords dataset)
   * Sequential patterns (e.g. `12345`, `qwerty`)
 * Strength classification:
 
@@ -32,6 +32,9 @@ Built with a focus on **security realism, user experience, and modern web techno
   * GPU-based offline attacks
   * High-performance cracking rigs
 * Displays **average and worst-case cracking times**
+
+Crack time estimates based on Hashcat benchmarks and the Hive Systems Password Table (2024).
+Estimates assume MD5 hashing. Sites using bcrypt or Argon2 are significantly more resistant.
 
 ---
 
@@ -144,8 +147,8 @@ Dolos simulates how attackers think:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/dolos.git
-cd dolos
+git clone https://github.com/YungSkang/Dolos.git
+cd Dolos
 ```
 
 ---
@@ -228,13 +231,13 @@ http://localhost:5173
 
 ---
 
+
 ## 🚀 Future Improvements
 
-* 📧 Phishing email detection module
+* 📧 ML-based phishing email & URL detection (v2 — in progress)
 * 🤖 AI-powered explanations (LLM integration)
-* 🔐 Password leak detection via APIs (HaveIBeenPwned)
+* 🔐 Password leak detection via HaveIBeenPwned API
 * 📊 User dashboard & analytics
-* 🌐 Deployment (Hostinger / Cloud)
 
 ---
 
@@ -249,6 +252,10 @@ Unlike typical password checkers, Dolos:
 ✔ Demonstrates full-stack + cybersecurity skills
 
 ---
+
+## 🌐 Live Demo
+
+👉 [dolos-nu.vercel.app](https://dolos-nu.vercel.app)
 
 ## 👨‍💻 Author
 
