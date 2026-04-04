@@ -49,6 +49,12 @@ body {
   transform: scale(1.03);
 }
 
+/* PSC Text */
+.psc-text img {
+  width: 60vh;
+}
+
+
 /* INPUT ROW */
 .input-row {
   display: flex;
@@ -200,12 +206,12 @@ button:disabled {
 .bar-tier-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 14px;
   color: #4b5563;
   margin-top: 3px;
 }
 .entropy-label {
-  font-size: 12px;
+  font-size: 14px;
   color: #9ca3af;
   margin: 0;
 }
@@ -219,8 +225,8 @@ button:disabled {
 
 /* SECTION LABEL */
 .section-label {
-  color: #6b7280;
-  font-size: 11px;
+  color: #c6c9ce;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin: 0 0 8px;
@@ -239,7 +245,7 @@ button:disabled {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: #d1d5db;
   padding: 7px 10px;
   border-radius: 8px;
@@ -275,7 +281,7 @@ button:disabled {
 }
 .crack-type {
   color: #6b7280;
-  font-size: 11px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0 0 4px;
@@ -295,7 +301,8 @@ button:disabled {
 }
 .generated-pwd {
   color: #ffffff;
-  font-size: 13px;
+  align-items: center;
+  font-size: 14px;
   background: rgba(0,255,160,0.07);
   padding: 6px 10px;
   border-radius: 6px;
@@ -320,7 +327,7 @@ button:disabled {
 }
 .gen-hint {
   color: #4b5563;
-  font-size: 11px;
+  font-size: 14px;
   margin: 6px 0 0;
 }
 
@@ -341,7 +348,7 @@ button:disabled {
   color: #c1ff72 !important;
   border-radius: 8px !important;
   padding: 10px 20px !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
@@ -374,8 +381,8 @@ button:disabled {
   color: #ff3131;
 }
 .personal-desc {
-  font-size: 13px;
-  color: #9ca3af;
+  font-size: 14px;
+  color: #d6d9de;
   line-height: 1.6;
   margin: 0;
 }
@@ -402,6 +409,12 @@ button:disabled {
   padding: 10px 12px !important;
 }
 
+.personal-form input:focus {
+  transform: scale(1.02) !important;
+  border-color: #ff4b4b !important;
+  box-shadow: 0 0 10px #ff4b4b !important;
+}
+
 /* ANALYZE BUTTON */
 .analyze-personal-btn {
   padding: 12px 18px !important;
@@ -409,7 +422,7 @@ button:disabled {
   border: none !important;
   cursor: pointer;
   font-weight: bold;
-  background: linear-gradient(135deg, #874bff, #790b9d) !important;
+  background: linear-gradient(135deg, #b60303, #f62828) !important;
   color: black !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 14px !important;
@@ -417,7 +430,7 @@ button:disabled {
 }
 .analyze-personal-btn:hover {
   transform: scale(1.02) !important;
-  box-shadow: 0 0 15px #874bff !important;
+  box-shadow: 0 0 15px #ff4b4b !important;
 }
 
 /* PERSONAL RESULTS */
@@ -459,16 +472,16 @@ button:disabled {
   flex-shrink: 0;
 }
 .personal-entropy {
-  font-size: 11px;
+  font-size: 12px;
   color: #6b7280;
 }
 .personal-crack {
-  font-size: 11px;
+  font-size: 12px;
   color: #9ca3af;
   white-space: nowrap;
 }
 .personal-warning {
-  font-size: 12px;
+  font-size: 14px;
   color: #ff8c00;
   background: rgba(255,140,0,0.07);
   border: 1px solid rgba(255,140,0,0.15);

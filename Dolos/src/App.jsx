@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import heroImg from './assets/hero.png'
+import pscImg from './assets/psc_text.png'
 import EyeField from './EyeField'
 import './App.css'
 
@@ -24,7 +25,7 @@ const STRENGTH_COLOR = {
   "Weak":        "#ff8c00",
   "Fair":        "#ffd700",
   "Strong":      "#7cfc00",
-  "Very Strong": "#00ff9f",
+  "Very Strong": "#874bff ",
 }
 
 const STRENGTH_CLASS = {
@@ -135,10 +136,13 @@ export default function App() {
     <EyeField count={8} />
     <section id="center">
       <div className="hero">
-        <img src={heroImg} alt="" />
+        <img src={heroImg} alt="Dolos Logo" />
       </div>
 
-      <h1>Password Strength Checker</h1>
+    <div className="psc-text">
+        <img src={pscImg} alt="Password Strength Checker" />
+      </div>
+      {/* <h1>Password Strength Checker</h1> */}
 
       {/* ── Input form ── */}
       <form className="input-row" onSubmit={handleCheck}>
@@ -302,7 +306,7 @@ export default function App() {
               onClick={handlePersonalCheck}
               disabled={personalLoading}
             >
-              {personalLoading ? 'Generating…' : 'Show attack candidates'}
+              {personalLoading ? 'Generating…' : 'Calculate vulnerable passwords'}
             </button>
 
             {personalResults.length > 0 && (
