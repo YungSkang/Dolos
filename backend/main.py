@@ -4,12 +4,17 @@ from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from backend.password_logic import (
     password_analysis,
     load_passwords,
     build_personal_candidates,
     analyze_personal_candidates,
 )
+
+from backend.url_logic import ( analyze_url)
 
 app = FastAPI()
 
@@ -34,6 +39,9 @@ common_passwords = load_passwords()
 class PasswordRequest(BaseModel):
     password: str
 
+class URLRequest(BaseModel):
+    url:              str
+    use_virustotal:   bool = True
 
 class PersonalInfoRequest(BaseModel):
     first_name: Optional[str] = None
@@ -47,6 +55,9 @@ class PersonalInfoRequest(BaseModel):
 def analyze_password(request: PasswordRequest):
     return password_analysis(request.password, common_passwords)
 
+@app.post("/analyze-url")
+def analyze_url_endpoint(request: URLRequest):
+    return analyze_url(request.url, request.use_virustotal)
 
 @app.post("/personal-candidates")
 def personal_candidates(request: PersonalInfoRequest):
