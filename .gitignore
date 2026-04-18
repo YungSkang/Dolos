@@ -24,3 +24,6 @@ dist-ssr
 .env.*
 *.env
 *.sw?
+backend/url_model.pkl
+backend/url_features_columns.pkl
+backend/url_label_map.pkl
