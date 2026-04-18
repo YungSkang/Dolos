@@ -5,7 +5,7 @@ import os
 import time
 
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 VT_API_KEY = os.getenv('VIRUSTOTAL_API_KEY')
 VT_BASE    = 'https://www.virustotal.com/api/v3'
@@ -23,6 +23,10 @@ def _url_id(url: str) -> str:
 
 #submit URL for scanning and return analysis results
 def scan_url(url: str) -> dict:
+    headers = {
+        'x-apikey': os.getenv('VIRUSTOTAL_API_KEY'),
+        'accept':   'application/json',
+    }
     # Step 1 — submit the URL
     submit_res = requests.post(
         f'{VT_BASE}/urls',
@@ -31,6 +35,7 @@ def scan_url(url: str) -> dict:
         timeout=10
     )
     if submit_res.status_code != 200:
+        print(VT_API_KEY)
         return {'error': 'Failed to submit URL to VirusTotal'}
 
     # Step 2 — wait briefly then fetch the report
