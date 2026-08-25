@@ -1,10 +1,10 @@
-# 🔐 Dolos — AI-Powered Cybersecurity Awareness Platform
+# 🔐 Dolos - AI-Powered Cybersecurity Awareness Platform
 
 ![Dolos Screenshot](Dolos/src/assets/screenshot_1.png)
 
-> *Dolos (Δόλος) — the Greek spirit of trickery and deception. Named after the attacker mindset this tool is built to expose.*
+> *Dolos (Δόλος) - the Greek spirit of trickery and deception. Named after the attacker mindset this tool is built to expose.*
 
-Dolos is a full-stack cybersecurity awareness platform that simulates real-world attack techniques to educate users on password vulnerabilities, social engineering, and phishing threats. Unlike traditional security tools, Dolos doesn't just warn you — it shows you exactly how an attacker would target you.
+Dolos is a full-stack cybersecurity awareness platform that simulates real-world attack techniques to educate users on password vulnerabilities, social engineering, and phishing threats. Unlike traditional security tools, Dolos doesn't just warn you - it shows you exactly how an attacker would target you.
 
 🌐 **Live Demo:** [dolos-nu.vercel.app](https://dolos-nu.vercel.app)
 
@@ -30,7 +30,7 @@ Dolos is a full-stack cybersecurity awareness platform that simulates real-world
 ## 🚀 Features
 
 ### 🔑 Password Strength Analysis
-- **Entropy-based scoring** — real mathematical strength, not checkbox rules
+- **Entropy-based scoring** - real mathematical strength, not checkbox rules
 - **10 Million password dataset** lookup with O(1) hash-set performance
 - Detects weak length, low complexity, and predictable patterns
 - Strength classification: `Compromised` / `Very Weak` / `Weak` / `Fair` / `Strong` / `Very Strong`
@@ -47,7 +47,7 @@ Simulates three real-world attack scenarios based on Hashcat benchmarks and the 
 > Estimates assume MD5 hashing. Sites using bcrypt or Argon2 are significantly more resistant.
 
 ### 🧠 Personal Info Attack Simulator *(Core Feature)*
-Users optionally provide personal details — name, surname, birthdate, pet name, city — and Dolos generates the exact passwords an attacker who knows them would try first:
+Users optionally provide personal details - name, surname, birthdate, pet name, city - and Dolos generates the exact passwords an attacker who knows them would try first:
 
 ```
 Nick + 03/05/2003 → Nick03, Nick2003, Nick0305, NickSmith03, Nick.Smith03...
@@ -58,19 +58,19 @@ Each candidate is analyzed for entropy, strength, and GPU crack time. Demonstrat
 ### 🔗 URL Phishing Detection *(V2)*
 A three-layer ML pipeline for URL phishing classification:
 
-- **Layer 1 — Random Forest** trained on 550,000 labeled URLs with 30+ engineered features
-- **Layer 2 — DistilBERT** transformer (`pirocheto/phishing-url-detection`) for character-level semantic analysis
-- **Layer 3 — VirusTotal API** cross-references 90+ real antivirus engines for authoritative verdict
+- **Layer 1 - Random Forest** trained on 550,000 labeled URLs with 30+ engineered features
+- **Layer 2 - DistilBERT** transformer (`pirocheto/phishing-url-detection`) for character-level semantic analysis
+- **Layer 3 - VirusTotal API** cross-references 90+ real antivirus engines for authoritative verdict
 
 Layers are combined with weighted confidence scoring. VirusTotal overrides ML when it has a strong signal.
 
 ### 🎲 Secure Password Generator
 - Cryptographically random using `crypto.getRandomValues()`
-- Runs entirely client-side — never sent to any server
+- Runs entirely client-side - never sent to any server
 
 ### 🎨 Modern UI/UX
 - Entropy bar with tier labels and dynamic color coding
-- Animated SVG eye background — the Dolos logo watching you type
+- Animated SVG eye background - the Dolos logo watching you type
 - Glassmorphism card design
 - Responsive layout with smooth transitions
 
@@ -81,12 +81,12 @@ Layers are combined with weighted confidence scoring. VirusTotal overrides ML wh
 ```
 ┌─────────────────────────────────────────────────────┐
 │                   React / Vite Frontend              │
-│         Vercel — dolos-nu.vercel.app                │
+│         Vercel - dolos-nu.vercel.app                │
 └────────────────────┬────────────────────────────────┘
                      │ HTTPS
 ┌────────────────────▼────────────────────────────────┐
 │                FastAPI Backend                       │
-│         Render — dolos-backend.onrender.com         │
+│         Render - dolos-backend.onrender.com         │
 │                                                     │
 │  /analyze-password    →  password_logic.py          │
 │  /personal-candidates →  password_logic.py          │
@@ -154,7 +154,7 @@ Where `L` = password length, `N` = charset size (26 lowercase + 26 uppercase + 1
 
 ### 2. Social Engineering Simulation
 
-The personal attack simulator models how real attackers build targeted wordlists using OSINT (Open Source Intelligence) gathered from social media profiles and data breaches. Combinations include name fragments, birth date patterns, and common substitutions — the same logic used by tools like Hashcat rules and CUPP (Common User Passwords Profiler).
+The personal attack simulator models how real attackers build targeted wordlists using OSINT (Open Source Intelligence) gathered from social media profiles and data breaches. Combinations include name fragments, birth date patterns, and common substitutions - the same logic used by tools like Hashcat rules and CUPP (Common User Passwords Profiler).
 
 ### 3. URL Phishing Detection Pipeline
 
@@ -201,7 +201,7 @@ Random Forest classifier trained on 549,346 URLs from the Kaggle Phishing Site U
 | Naive Bayes | 0.812 | 0.798 | 0.801 |
 | Support Vector Machine | 0.879 | 0.863 | 0.821 |
 
-Random Forest was selected as the production model for its best overall accuracy and recall — minimising missed phishing URLs (false negatives) is prioritised over false positive rate in a security context.
+Random Forest was selected as the production model for its best overall accuracy and recall - minimising missed phishing URLs (false negatives) is prioritised over false positive rate in a security context.
 
 > *Note: Update the table above with your actual printed metrics after training.*
 
@@ -258,7 +258,7 @@ npm run dev
 
 Frontend runs on `http://localhost:5173`
 
-### 4. Train the URL model (optional — pre-trained model auto-downloads from HuggingFace)
+### 4. Train the URL model (optional - pre-trained model auto-downloads from HuggingFace)
 
 Download the dataset from [Kaggle](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls) and place it at `backend/phishing_site_urls.csv`, then:
 
@@ -347,7 +347,7 @@ python backend/train_url_model.py
 | Resource | Source | Usage |
 |---|---|---|
 | Password dataset | [SecLists by Daniel Miessler](https://github.com/danielmiessler/SecLists/tree/master/Passwords) | Top 10M common passwords for breach detection |
-| URL phishing dataset | [Kaggle — Phishing Site URLs](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls) | 549,346 labeled URLs for ML training |
+| URL phishing dataset | [Kaggle - Phishing Site URLs](https://www.kaggle.com/datasets/taruntiwarihp/phishing-site-urls) | 549,346 labeled URLs for ML training |
 | Deep URL classifier | [pirocheto/phishing-url-detection](https://huggingface.co/pirocheto/phishing-url-detection) | Pre-trained DistilBERT for URL classification |
 | Crack time methodology | [Hive Systems Password Table 2024](https://www.hivesystems.com/blog/are-your-passwords-in-the-green) | GPU attack speed benchmarks |
 | Crack speed benchmarks | [Hashcat](https://hashcat.net/hashcat/) | Real-world hash cracking speeds |
@@ -356,15 +356,15 @@ python backend/train_url_model.py
 
 ## 🔮 Future Roadmap
 
-- **📧 Email phishing detection** — fine-tuned DistilBERT on Enron + CEAS datasets
-- **📊 User dashboard** — track analysis history and improvement over time
-- **🌍 Browser extension** — real-time URL checking as you browse
+- **📧 Email phishing detection** - fine-tuned DistilBERT on Enron + CEAS datasets
+- **📊 User dashboard** - track analysis history and improvement over time
+- **🌍 Browser extension** - real-time URL checking as you browse
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see below.
+This project is licensed under the **MIT License** - see below.
 
 ```
 MIT License
@@ -411,4 +411,4 @@ This project is built for **educational purposes only**. All attack simulations 
 
 ## ⭐ Support
 
-If this project helped you or you found it interesting, give it a star ⭐ — it helps more people find it and motivates further development.
+If this project helped you or you found it interesting, give it a star ⭐ - it helps more people find it and motivates further development.
