@@ -3,6 +3,10 @@ import heroImg from './assets/hero.png'
 import pscImg from './assets/psc_text.png'
 import EyeField from './EyeField'
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PrivacyPolicy from './pages/legal/PrivacyPolicy';
+import TermsOfUse from './pages/legal/TermsOfUse';
+import CookiePolicy from './pages/legal/CookiePolicy';
 
 //for the live API URL, we read from an environment variable injected by Vite. 
 // If not set, we default to localhost for local development.
@@ -48,7 +52,7 @@ function generateStrongPassword(length = 14) {
 
 // main app component
 
-export default function App() {
+export function MainApp() {
   const [password, setPassword]         = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [result, setResult]             = useState(null)
@@ -346,3 +350,28 @@ export default function App() {
   </>
   )
 }
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="app-shell">
+        <Routes>
+          <Route path="/" element={<MainApp />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsOfUse />} />
+          <Route path="/cookies" element={<CookiePolicy />} />
+        </Routes>
+
+        <footer className="site-footer">
+          <a href="/privacy">Privacy Policy</a>
+          {" · "}
+          <a href="/terms">Terms of Use</a>
+          {" · "}
+          <a href="/cookies">Cookie Policy</a>
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;

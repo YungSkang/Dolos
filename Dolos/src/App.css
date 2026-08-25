@@ -499,3 +499,39 @@ button:disabled {
   margin: 4px 0 0;
   line-height: 1.5;
 }
+/*Legal Pages Extras */
+  .site-footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .site-footer a {
+    color: inherit;
+    text-decoration: none;
+    margin: 0 0.25rem;
+  }
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+
+  .legal-page {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.legal-page h1,
+.legal-page h2 {
+  text-align: left;
+}
+
+.legal-page ul {
+  text-align: left;
+  padding-left: 1.5rem;
+}
+
+.legal-page table {
+  text-align: left;
+}
