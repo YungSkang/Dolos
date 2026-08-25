@@ -3,7 +3,7 @@ import heroImg from './assets/hero.png'
 import pscImg from './assets/psc_text.png'
 import EyeField from './EyeField'
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsOfUse from './pages/legal/TermsOfUse';
 import CookiePolicy from './pages/legal/CookiePolicy';
@@ -163,7 +163,7 @@ export function MainApp() {
             onClick={() => setShowPassword(v => !v)}
             aria-label="Toggle visibility"
           >
-            {showPassword ? <img src="/eye.png" alt="Hide password" style={{ width: '16px', height: '16px' }} /> : '-'}
+            {showPassword ? <img src="/eye.png" alt="Hide password" style={{ width: '16px', height: '16px' }} /> : '🙈'}
           </button>
         </div>
         <button type="submit" disabled={loading}>
@@ -362,12 +362,12 @@ function App() {
           <Route path="/cookies" element={<CookiePolicy />} />
         </Routes>
 
-        <footer className="site-footer">
-          <a href="/privacy">Privacy Policy</a>
+       <footer className="site-footer">
+          <Link to="/privacy">Privacy Policy</Link>
           {" · "}
-          <a href="/terms">Terms of Use</a>
+          <Link to="/terms">Terms of Use</Link>
           {" · "}
-          <a href="/cookies">Cookie Policy</a>
+          <Link to="/cookies">Cookie Policy</Link>
         </footer>
       </div>
     </BrowserRouter>
