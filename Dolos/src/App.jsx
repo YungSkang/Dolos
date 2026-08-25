@@ -163,7 +163,7 @@ export function MainApp() {
             onClick={() => setShowPassword(v => !v)}
             aria-label="Toggle visibility"
           >
-            {showPassword ? <img src="/eye.png" alt="Hide password" style={{ width: '16px', height: '16px' }} /> : '🙈'}
+            {showPassword ? <img src="/eye.png" alt="Hide password" style={{ width: '16px', height: '16px' }} /> : '-'}
           </button>
         </div>
         <button type="submit" disabled={loading}>
