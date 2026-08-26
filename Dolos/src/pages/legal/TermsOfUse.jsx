@@ -1,7 +1,7 @@
 export default function TermsOfUse() {
   return (
     <div className="legal-page">
-      <h1>Terms of Use - Dolos</h1>
+      <h1>Terms of Use -     Dolos</h1>
       <p><em>Last updated: 25/08/2026</em></p>
 
       <p>
