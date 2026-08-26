@@ -8,6 +8,3 @@ scikit-learn
 numpy
 tldextract
 requests
-huggingface_hub
-transformers
-torch
