@@ -14,8 +14,6 @@ from backend.password_logic import (
     analyze_personal_candidates,
 )
 
-from backend.url_logic import ( analyze_url)
-
 app = FastAPI()
 
 # Allow both local dev and the live Vercel frontend
@@ -39,9 +37,6 @@ common_passwords = load_passwords()
 class PasswordRequest(BaseModel):
     password: str
 
-class URLRequest(BaseModel):
-    url:              str
-    use_virustotal:   bool = True
 
 class PersonalInfoRequest(BaseModel):
     first_name: Optional[str] = None
@@ -54,10 +49,6 @@ class PersonalInfoRequest(BaseModel):
 @app.post("/analyze-password")
 def analyze_password(request: PasswordRequest):
     return password_analysis(request.password, common_passwords)
-
-@app.post("/analyze-url")
-def analyze_url_endpoint(request: URLRequest):
-    return analyze_url(request.url, request.use_virustotal)
 
 @app.post("/personal-candidates")
 def personal_candidates(request: PersonalInfoRequest):
